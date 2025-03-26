@@ -1,21 +1,43 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Box } from '@mui/material'
+
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom'
+
 import './App.css'
+
+// Import Pages
 import WomenPage from './pages/WomenPage'
 import HomePage from './pages/HomePage'
-import { Box } from '@mui/material'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// Import Layouts
+import RootLayout from './layouts/RootLayout'
+
+
+
+
 
 function App() {
 
-  return (
-    <Router>
-    <Routes>
-      <Route path="/" element={<HomePage />} />
+  const routesFromElements = createRoutesFromElements(
+    <Route path="/" element={<RootLayout />}>
+      <Route index element={<HomePage />} />
       <Route path="/women" element={<WomenPage />} />
-    </Routes>
-  </Router>
+    </Route>
+  )
+
+  const router = createBrowserRouter(routesFromElements)
+
+  return (
+    <>
+    <Box>
+      <RouterProvider router={router} />
+    </Box>
+    </>
   )
 }
 

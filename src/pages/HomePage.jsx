@@ -1,9 +1,9 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const HomePage = () => {
     return (
-        <Box>
-            Hello
+        <Box sx={{height: '100vh'}}>
+            <Typography sx={{color: '#000000'}}>Hello Jag är ifrån homepage</Typography>
         </Box>
     )
 }
