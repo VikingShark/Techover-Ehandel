@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Toolbar, Typography } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {ShoppingCartOutlined} from '@mui/icons-material';
 import './NavBar.css';
 
@@ -34,8 +34,12 @@ const NavBar = () => {
                     </Box>
                 </Box>
                 <Box sx={{display: 'flex', alignItems: 'center', gap: 4, width: '45%', justifyContent: 'flex-end'}}>
-                    <ShoppingCartOutlined sx={{color: '#000000', fontSize: 26}} />
-                    <Typography sx={{color: '#000000'}} variant="h6">(IMG)</Typography>
+                    <Link style={{textDecoration: 'none', display: 'flex', alignItems: 'center'}}>
+                        <ShoppingCartOutlined sx={{color: '#000000', fontSize: 26}} />
+                    </Link>
+                    <Link style={{textDecoration: 'none', display: 'flex', alignItems: 'center'}}>
+                        <Typography sx={{color: '#000000'}} variant="h6">(IMG)</Typography>
+                    </Link>
                 </Box>
                 
             </Box>
