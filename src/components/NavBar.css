@@ -5,5 +5,16 @@
 
 .navlink.active {
     border-bottom: 5px solid #ff7d1a;
-    
+}
+
+.navlink__mobile {
+    text-decoration: none;
+    color: #000000;
+    display: inline-block;
+    max-width: 40px;
+    font-weight: 700;
+}
+
+.navlink__mobile.active {
+    border-bottom: 5px solid #ff7d1a;
 }

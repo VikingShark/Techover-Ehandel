@@ -1,11 +1,21 @@
 import { Box, Divider, Typography, Avatar } from "@mui/material";
+import { ShoppingCartOutlined, Menu, Close } from "@mui/icons-material";
+
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { ShoppingCartOutlined, Menu } from "@mui/icons-material";
+
 import "./NavBar.css";
+import MobileSideMenu from "./MobileSideMenu";
 
 const NavBar = () => {
-  // Todo: Add open and close state to the side menu
-  const handleOpenMenu = () => {};
+  
+    // Handle open/close state of side menu
+  const [openMenu, setOpenMenu] = useState(false);
+
+  const handleOpenMenu = () => {
+    setOpenMenu((prev) => !prev);
+    console.log(openMenu ? "menyn är stängd" : "menyn är öppen");
+  };
 
   const handleOpenCart = () => {};
 
@@ -29,7 +39,7 @@ const NavBar = () => {
     {
       text: "Contact",
       to: "/contact",
-    }
+    },
   ];
 
   return (
@@ -44,6 +54,7 @@ const NavBar = () => {
         flexDirection: "column",
       }}
     >
+      <MobileSideMenu openMenu={openMenu} setOpenMenu={setOpenMenu} navLinks={navLinks} />
       <Box
         px={2}
         sx={{
@@ -77,10 +88,10 @@ const NavBar = () => {
               marginTop: "auto",
             }}
           >
-            {navLinks.map(({to, text}) => (
-                <NavLink className="navlink" to={to}>
-                    {text}
-                </NavLink>
+            {navLinks.map(({ to, text }) => (
+              <NavLink key={text} className="navlink" to={to}>
+                {text}
+              </NavLink>
             ))}
           </Box>
         </Box>
@@ -94,14 +105,27 @@ const NavBar = () => {
             position: "relative",
           }}
         >
-          <Menu
-            onClick={handleOpenMenu}
-            sx={{
-              color: "#68707d",
-              fontSize: { xs: 22, md: 26 },
-              "&:hover": { cursor: "pointer" },
-            }}
-          />
+          {openMenu ? (
+            <Close
+              onClick={handleOpenMenu}
+              sx={{
+                color: "#68707d",
+                fontSize: { xs: 22, md: 26 },
+                "&:hover": { cursor: "pointer" },
+                zIndex: 9999,
+              }}
+            />
+          ) : (
+            <Menu
+              onClick={handleOpenMenu}
+              sx={{
+                color: "#68707d",
+                fontSize: { xs: 22, md: 26 },
+                "&:hover": { cursor: "pointer" },
+                zIndex: 9999,
+              }}
+            />
+          )}
           <Typography
             sx={{
               color: "#000000",
