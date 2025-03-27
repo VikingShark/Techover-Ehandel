@@ -12,6 +12,7 @@
     color: #000000;
     display: inline-block;
     max-width: 40px;
+    font-weight: 700;
 }
 
 .navlink__mobile.active {
