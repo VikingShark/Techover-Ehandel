@@ -14,16 +14,16 @@ The designs were created to the following widths:
 ### Primary
 
 - Orange: #ff7d1a
-- Pale orange: hsl(25, 100%, 94%)
+- Pale orange: #ffede0
 
 ### Neutral
 
-- Very dark blue: hsl(220, 13%, 13%)
-- Dark grayish blue: hsl(219, 9%, 45%)
-- Grayish blue: hsl(220, 14%, 75%)
-- Light grayish blue: hsl(223, 64%, 98%)
-- White: hsl(0, 0%, 100%)
-- Black (with 75% opacity for lightbox background): hsl(0, 0%, 0%)
+- Very dark blue: #1d2025
+- Dark grayish blue: #68707d
+- Grayish blue: #b6bcc8
+- Light grayish blue: #f7f8fd
+- White: #ffffff
+- Black (with 75% opacity for lightbox background): #00000075
 
 ## Typography
 
