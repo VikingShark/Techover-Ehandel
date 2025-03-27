@@ -1,9 +1,8 @@
 import { Outlet } from 'react-router-dom'
 import { Box } from '@mui/material'
 
-import NavBar from '../components/NavBar'
 
-const RootLayout = () => {
+const RootLayout = ({ NavBar }) => {
     return (
         <Box>
             <NavBar />
