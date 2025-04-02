@@ -14,23 +14,26 @@ import { ArrowBackIos, ArrowForwardIos, Close } from "@mui/icons-material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import img1 from '../assets/image-product-1.jpg';
-import img2 from '../assets/image-product-2.jpg';
-import img3 from '../assets/image-product-3.jpg';
-import img4 from '../assets/image-product-4.jpg';
+import img1 from "../assets/Women/image-product-1.jpg";
+import img2 from "../assets/Women/image-product-2.jpg";
+import img3 from "../assets/Women/image-product-3.jpg";
+import img4 from "../assets/Women/image-product-4.jpg";
+import { PRODUCT_DATA } from "../mock-data/Products.js";
+
+
 
 const WomenPage = () => {
-
+  console.log(PRODUCT_DATA);
   const images = [img1, img2, img3, img4];
   const [mainImage, setMainImage] = useState(images[0]);
-  const [modalImage, setModalImage] = useState(images[0])
+  const [modalImage, setModalImage] = useState(images[0]);
   const [open, setOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
   const handleOpen = (index) => {
-    setCurrentIndex(index);  // Update current index
-    setMainImage(images[index]); 
+    setCurrentIndex(index); // Update current index
+    setMainImage(images[index]);
     setOpen(true);
   };
 
@@ -53,18 +56,6 @@ const WomenPage = () => {
   };
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden"; //
-    } else {
-      document.body.style.overflow = "auto"; // 
-    }
-
-    return () => {
-      document.body.style.overflow = "auto"; // 
-    };
-  }, [open]);
-
-  useEffect(() => {
     const handleKeyDown = (e) => {
       if (!open) return;
       if (e.key === "ArrowRight") handleNext();
@@ -84,15 +75,19 @@ const WomenPage = () => {
   };
 
   return (
-    <Container disableGutters sx={{ 
-      mt: 4 }}>
+    <Container
+      disableGutters
+      sx={{
+        mt: 4,
+      }}
+    >
       <Grid
         container
         spacing={2}
         justifyContent="center"
         alignItems="flex-start"
         sx={{
-          flexWrap: {sx: 'wrap' ,md: 'nowrap'}
+          flexWrap: { sx: "wrap", md: "nowrap" },
         }}
       >
         <Grid
@@ -105,57 +100,62 @@ const WomenPage = () => {
           sx={{ position: "relative" }}
         >
           <Card
-              sx={{ maxWidth: 500, maxHeight: 500, cursor: "pointer", position: "relative",}}
-              onClick={() => {
-                if (window.innerWidth >= 768) {
-                  handleOpen(currentIndex);
-                }                
-              }}
+            sx={{
+              maxWidth: 500,
+              maxHeight: 500,
+              cursor: "pointer",
+              position: "relative",
+            }}
+            onClick={() => {
+              if (window.innerWidth >= 768) {
+                handleOpen(currentIndex);
+              }
+            }}
           >
             <CardMedia
               component="img"
               image={mainImage}
               alt="Main product"
-              sx={{ 
-                borderRadius: 2, 
-                width:  "100%",
+              sx={{
+                borderRadius: 2,
+                width: "100%",
                 height: "100%",
-                objectFit: "contain", 
+                objectFit: "contain",
                 transition: "opacity 0.3s ease-in-out",
               }}
             />
             <IconButton
-      onClick={handlePrev}
-      sx={{
-        position: "absolute",
-        top: "50%",
-        left: 10,
-        transform: "translateY(-50%)",
-        color: "white",
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        display: { xs: "flex", md: "none" }, 
-        "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.7)" },
-      }}
-    >
-      <ArrowBackIos sx={{ fontSize: 30 }} />
-    </IconButton>
+              onClick={handlePrev}
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: 10,
+                transform: "translateY(-50%)",
+                color: "white",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                display: { xs: "flex", md: "none" },
+                "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.7)" },
+              }}
+            >
+              <ArrowBackIos sx={{ fontSize: 30 }} />
+            </IconButton>
 
-    {/* Right Arrow */}
-    <IconButton
-      onClick={handleNext}
-      sx={{
-        position: "absolute",
-        top: "50%",
-        right: 10,
-        transform: "translateY(-50%)",
-        color: "white",
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        display: { xs: "flex", md: "none" }, 
-        "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.7)" },
-      }}
-    >
-      <ArrowForwardIos sx={{ fontSize: 30 }} />
-    </IconButton>
+            {/* Right Arrow */}
+            <IconButton
+              onClick={handleNext}
+              sx={{
+                position: "absolute",
+                top: "50%",
+                right: 10,
+                transform: "translateY(-50%)",
+                color: "white",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                display: { xs: "flex", md: "none" },
+                "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.7)" },
+              }}
+            >
+              <ArrowForwardIos sx={{ fontSize: 30 }} />
+            </IconButton>
           </Card>
         </Grid>
 
@@ -166,35 +166,50 @@ const WomenPage = () => {
           container
           direction="column"
           spacing={2}
-          sx={{ 
-            mt: { xs: 1, md: 8 }, 
-            mx: { xs: 2, md: 1},
-
+          sx={{
+            mt: { xs: 1, md: 8 },
+            mx: { xs: 2, md: 1 },
           }}
         >
           <Typography
             variant="h2"
             sx={{
-              fontSize: { xs:18, md:22},
+              fontSize: { xs: 18, md: 22 },
               color: "hsl(219, 9%, 45%)",
               m: { xs: 0.5, md: 2 },
               fontWeight: 700,
-              textAlign: 'start'
+              textAlign: "start",
             }}
           >
             Sneaker company
           </Typography>
           <Typography
             variant="h1"
-            sx={{ fontSize: { xs: 28, md:36}, fontWeight: "bold", m: { xs: 0.5, md: 2 }, pt: {xs: 0.5, md:2}, color: 'black', textAlign: 'start' }}
+            sx={{
+              fontSize: { xs: 28, md: 36 },
+              fontWeight: "bold",
+              m: { xs: 0.5, md: 2 },
+              pt: { xs: 0.5, md: 2 },
+              color: "black",
+              textAlign: "start",
+            }}
           >
             Fall Limited Edition Sneakers
           </Typography>
           <Typography
             variant="body1"
-            sx={{ fontSize: 16, m: { xs: 0.5, md:2}, pt: { xs: 1, md:4}, color: "hsl(219, 9%, 45%)", textAlign: 'start', lineHeight: {xs: 1.5, md:2} }}
+            sx={{
+              fontSize: 16,
+              m: { xs: 0.5, md: 2 },
+              pt: { xs: 1, md: 4 },
+              color: "hsl(219, 9%, 45%)",
+              textAlign: "start",
+              lineHeight: { xs: 1.5, md: 2 },
+            }}
           >
-            These low-profile sneakers are your perfect casual wear companion, Featuring a durable rubber outer solse, they'll withstand everything the weather can offer.
+            These low-profile sneakers are your perfect casual wear companion,
+            Featuring a durable rubber outer solse, they'll withstand everything
+            the weather can offer.
           </Typography>
           <Box
             sx={{
@@ -202,43 +217,48 @@ const WomenPage = () => {
               alignItems: "flex-start",
               flexDirection: { xs: "row", md: "column" },
               justifyContent: { xs: "space-between", md: "flex-start" },
-              flexWrap: 'wrap',
+              flexWrap: "wrap",
               pt: 2,
               gap: { xs: 1, md: 1 },
             }}
           >
-            <Box sx={{
-              display: 'flex',
-              m: {xs: 0, md: 2}
-            }}>
-            <Typography variant="h4" sx={{ fontWeight: 700, color: "black", fontSize: {xs: 30} }}>
-              $125.00
-            </Typography>
             <Box
               sx={{
-                bgcolor: "black",
-                color: "white",
-                borderRadius: 2,
-                p: 1,
-                ml: 2,
+                display: "flex",
+                m: { xs: 0, md: 2 },
               }}
             >
-              50%
+              <Typography
+                variant="h4"
+                sx={{ fontWeight: 700, color: "black", fontSize: { xs: 30 } }}
+              >
+                $125.00
+              </Typography>
+              <Box
+                sx={{
+                  bgcolor: "black",
+                  color: "white",
+                  borderRadius: 2,
+                  p: 1,
+                  ml: 2,
+                }}
+              >
+                50%
+              </Box>
             </Box>
-            </Box>
-          
-          <Typography
-            sx={{
-              textDecoration: "line-through",
-              fontWeight: "800",
-              color: "hsl(219, 9%, 45%)",
-              textAlign: 'start',
-              ml: { xs: "auto", md: 2 },
-              pr: { xs: 1, md: 1 },
-            }}
-          >
-            $250.00
-          </Typography>
+
+            <Typography
+              sx={{
+                textDecoration: "line-through",
+                fontWeight: "800",
+                color: "hsl(219, 9%, 45%)",
+                textAlign: "start",
+                ml: { xs: "auto", md: 2 },
+                pr: { xs: 1, md: 1 },
+              }}
+            >
+              $250.00
+            </Typography>
           </Box>
           <Box
             sx={{
@@ -247,34 +267,44 @@ const WomenPage = () => {
               justifyContent: "space-between",
               flexDirection: { xs: "column", md: "row" },
               width: "100%",
-              mt: { xs: 1, md:5},
+              mt: { xs: 1, md: 5 },
               bgcolor: "hsl(223, 64%, 98%)",
               borderRadius: 2,
-              p: {xs: 0, md:1},
+              p: { xs: 0, md: 1 },
             }}
           >
-            <Box sx={{ 
-              display: "flex",
-               alignItems: "center",
-                  justifyContent: {xs: 'space-between', md:"center"},
-                  width: { xs: "100%", md: "auto" }, 
-                  mb: { xs: 1, md: 0 }, }}>
-
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: { xs: "space-between", md: "center" },
+                width: { xs: "100%", md: "auto" },
+                mb: { xs: 1, md: 0 },
+              }}
+            >
               <IconButton
                 aria-label="remove"
                 size="small"
                 sx={{
                   color: "hsl(26, 100%, 55%)",
                   "&:focus": { outline: "none" },
-                  "&:hover": {color: "hsl(26, 95.00%, 65%)"},
+                  "&:hover": { color: "hsl(26, 95.00%, 65%)" },
                   fontSize: "2rem",
                 }}
                 onClick={handleDecrease}
                 disableRipple
               >
-                <RemoveIcon  sx={{ fontSize: "inherit" }} />
+                <RemoveIcon sx={{ fontSize: "inherit" }} />
               </IconButton>
-              <Typography variant="h6" sx={{ mx: 4, color: 'black', fontSize: {xs: 18, md:28}, fontWeight: 'bold' }}>
+              <Typography
+                variant="h6"
+                sx={{
+                  mx: 4,
+                  color: "black",
+                  fontSize: { xs: 18, md: 28 },
+                  fontWeight: "bold",
+                }}
+              >
                 {quantity}
               </Typography>
               <IconButton
@@ -284,7 +314,7 @@ const WomenPage = () => {
                   fontSize: "2rem",
                   color: "hsl(26, 100%, 55%)",
                   "&:focus": { outline: "none" },
-                  "&:hover": {color: "hsl(26, 95.00%, 65%)"},
+                  "&:hover": { color: "hsl(26, 95.00%, 65%)" },
                 }}
                 onClick={handleIncrease}
                 disableRipple
@@ -296,12 +326,12 @@ const WomenPage = () => {
               variant="contained"
               sx={{
                 width: { xs: "100%", md: 300 },
-                height: {xs: 55, md: 60},
+                height: { xs: 55, md: 60 },
                 bgcolor: "hsl(26, 100%, 55%)",
                 color: "black",
                 fontWeight: 800,
                 borderRadius: 3,
-                "&:hover": {bgcolor: "hsl(26, 95.00%, 65%)"}
+                "&:hover": { bgcolor: "hsl(26, 95.00%, 65%)" },
               }}
             >
               <AddShoppingCartIcon sx={{ mr: 2 }} />
@@ -322,7 +352,18 @@ const WomenPage = () => {
         sx={{ mt: 4, display: { xs: "none", md: "flex" } }}
       >
         {images.map((img, index) => (
-          <Box key={index} item xs={3} sm={2} md={2} sx={{ m: 2,  backgroundColor: mainImage === img ? "rgba(255, 255, 255, 0.3)" : "transparent", }}>
+          <Box
+            key={index}
+            item
+            xs={3}
+            sm={2}
+            md={2}
+            sx={{
+              m: 2,
+              backgroundColor:
+                mainImage === img ? "rgba(255, 255, 255, 0.3)" : "transparent",
+            }}
+          >
             <Card
               sx={{
                 width: 100,
@@ -330,27 +371,27 @@ const WomenPage = () => {
                 cursor: "pointer",
                 border:
                   mainImage === img ? "3px solid hsl(26, 100%, 65%)" : "none",
-                  position: "relative",
-                  "&:hover::after": {
-                    content: '""',
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    backgroundColor: "rgba(255, 255, 255, 0.4)", // White transparent overlay
-                    borderRadius: "4px",
-                  },
-                  "&::after": {
-                    content: mainImage === img ? '""' : "none",
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    backgroundColor: "rgba(255, 255, 255, 0.4)", // Highlighting effect
-                  },
-                }}
+                position: "relative",
+                "&:hover::after": {
+                  content: '""',
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "rgba(255, 255, 255, 0.4)", // White transparent overlay
+                  borderRadius: "4px",
+                },
+                "&::after": {
+                  content: mainImage === img ? '""' : "none",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "rgba(255, 255, 255, 0.4)", // Highlighting effect
+                },
+              }}
               onClick={() => {
                 setMainImage(img);
                 setCurrentIndex(index);
@@ -360,8 +401,7 @@ const WomenPage = () => {
                 component="img"
                 image={img}
                 alt={`Thumbnail ${index + 1}`}
-                sx={{ width: "100%", height: "100%", objectFit: "cover"          
-                }}
+                sx={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             </Card>
           </Box>
@@ -393,14 +433,14 @@ const WomenPage = () => {
               image={modalImage}
               alt="Zoomed-in product"
               tabIndex={-1}
-              sx={{ 
-                 width: "100%",
-                 height: "100%",
-                 objectFit: "contain", 
-                 borderRadius: 4,
-                 outline: "none",
-                 "&:focus": { outline: "none" }
-                }}
+              sx={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                borderRadius: 4,
+                outline: "none",
+                "&:focus": { outline: "none" },
+              }}
             />
             <Box
               sx={{ display: "flex", justifyContent: "center", gap: 4, mt: 2 }}
@@ -413,58 +453,59 @@ const WomenPage = () => {
                     height: 75,
                     cursor: "pointer",
                     border:
-                    modalImage === img
+                      modalImage === img
                         ? "2px solid hsl(26, 100%, 55%)"
                         : "none",
-                        backgroundColor: 
-                        modalImage === img ? "rgba(255, 255, 255, 0.4)" : "transparent",
+                    backgroundColor:
+                      modalImage === img
+                        ? "rgba(255, 255, 255, 0.4)"
+                        : "transparent",
                     borderRadius: 2,
-                    overflow: 'hidden',
-                    
+                    overflow: "hidden",
                   }}
                   onClick={() => {
                     setModalImage(img);
                     setCurrentIndex(index);
                   }}
                 >
-                     <Box
-                        sx={{
-                          position: "relative",
-                          width: "100%",
-                          height: "100%",
-                          "&:hover::after": {
-                            content: '""',
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            width: "100%",
-                            height: "100%",
-                            backgroundColor: "rgba(255, 255, 255, 0.2)", 
-                            borderRadius: "4px",                            
-                          },
-                          "&::after": {
-                            content: modalImage === img ? '""' : "none",
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            width: "100%",
-                            height: "100%",
-                            backgroundColor: "rgba(255, 255, 255, 0.4)",
-                          },
-                        }}
-                      >
-                        <CardMedia
-                          component="img"
-                          image={img}
-                          alt={`Thumbnail ${index + 1}`}
-                          sx={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover", 
-                            borderRadius: 2, // 
-                          }}
-                        />
-                      </Box> 
+                  <Box
+                    sx={{
+                      position: "relative",
+                      width: "100%",
+                      height: "100%",
+                      "&:hover::after": {
+                        content: '""',
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "rgba(255, 255, 255, 0.2)",
+                        borderRadius: "4px",
+                      },
+                      "&::after": {
+                        content: modalImage === img ? '""' : "none",
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "rgba(255, 255, 255, 0.4)",
+                      },
+                    }}
+                  >
+                    <CardMedia
+                      component="img"
+                      image={img}
+                      alt={`Thumbnail ${index + 1}`}
+                      sx={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        borderRadius: 2, //
+                      }}
+                    />
+                  </Box>
                 </Card>
               ))}
             </Box>
@@ -479,7 +520,7 @@ const WomenPage = () => {
               "&:hover": {
                 transform: "scale(1.1)",
                 color: "hsl(26, 100%, 55%)",
-                background: 'none'
+                background: "none",
               },
             }}
           >
@@ -495,8 +536,11 @@ const WomenPage = () => {
               left: -19,
               color: "black",
               backgroundColor: "white",
-              "&:hover": { backgroundColor: "white", color: "hsl(26, 100%, 55%)" },
-              }}
+              "&:hover": {
+                backgroundColor: "white",
+                color: "hsl(26, 100%, 55%)",
+              },
+            }}
           >
             <ArrowBackIos sx={{ fontSize: 20 }} />
           </IconButton>
@@ -510,10 +554,13 @@ const WomenPage = () => {
               right: -21,
               color: "black",
               backgroundColor: "white",
-              "&:hover": { backgroundColor: "white", color: "hsl(26, 100%, 55%)" },
+              "&:hover": {
+                backgroundColor: "white",
+                color: "hsl(26, 100%, 55%)",
+              },
             }}
           >
-            <ArrowForwardIos sx={{ fontSize: 20  }} />
+            <ArrowForwardIos sx={{ fontSize: 20 }} />
           </IconButton>
         </Box>
       </Modal>
@@ -521,4 +568,10 @@ const WomenPage = () => {
   );
 };
 
+
 export default WomenPage;
+export const getProducts = async ({ params }) => {
+  await sleep(1500);
+  return PRODUCT_DATA;
+}
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
