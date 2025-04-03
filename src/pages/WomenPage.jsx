@@ -14,7 +14,6 @@ import { ArrowBackIos, ArrowForwardIos, Close } from "@mui/icons-material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-<<<<<<< HEAD
 import img1 from "../assets/Women/image-product-1.jpg";
 import img2 from "../assets/Women/image-product-2.jpg";
 import img3 from "../assets/Women/image-product-3.jpg";
@@ -28,30 +27,13 @@ const WomenPage = () => {
   const images = [img1, img2, img3, img4];
   const [mainImage, setMainImage] = useState(images[0]);
   const [modalImage, setModalImage] = useState(images[0]);
-=======
-import img1 from '../assets/image-product-1.jpg';
-import img2 from '../assets/image-product-2.jpg';
-import img3 from '../assets/image-product-3.jpg';
-import img4 from '../assets/image-product-4.jpg';
-
-const WomenPage = () => {
-
-  const images = [img1, img2, img3, img4];
-  const [mainImage, setMainImage] = useState(images[0]);
-  const [modalImage, setModalImage] = useState(images[0])
->>>>>>> dev
   const [open, setOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
   const handleOpen = (index) => {
-<<<<<<< HEAD
     setCurrentIndex(index); // Update current index
     setMainImage(images[index]);
-=======
-    setCurrentIndex(index);  // Update current index
-    setMainImage(images[index]); 
->>>>>>> dev
     setOpen(true);
   };
 
@@ -74,8 +56,6 @@ const WomenPage = () => {
   };
 
   useEffect(() => {
-<<<<<<< HEAD
-=======
     if (open) {
       document.body.style.overflow = "hidden"; //
     } else {
@@ -88,7 +68,6 @@ const WomenPage = () => {
   }, [open]);
 
   useEffect(() => {
->>>>>>> dev
     const handleKeyDown = (e) => {
       if (!open) return;
       if (e.key === "ArrowRight") handleNext();
@@ -108,28 +87,19 @@ const WomenPage = () => {
   };
 
   return (
-<<<<<<< HEAD
     <Container
       disableGutters
       sx={{
         mt: 4,
       }}
     >
-=======
-    <Container disableGutters sx={{ 
-      mt: 4 }}>
->>>>>>> dev
       <Grid
         container
         spacing={2}
         justifyContent="center"
         alignItems="flex-start"
         sx={{
-<<<<<<< HEAD
           flexWrap: { sx: "wrap", md: "nowrap" },
-=======
-          flexWrap: {sx: 'wrap' ,md: 'nowrap'}
->>>>>>> dev
         }}
       >
         <Grid
@@ -142,7 +112,6 @@ const WomenPage = () => {
           sx={{ position: "relative" }}
         >
           <Card
-<<<<<<< HEAD
             sx={{
               maxWidth: 500,
               maxHeight: 500,
@@ -154,37 +123,20 @@ const WomenPage = () => {
                 handleOpen(currentIndex);
               }
             }}
-=======
-              sx={{ maxWidth: 500, maxHeight: 500, cursor: "pointer", position: "relative",}}
-              onClick={() => {
-                if (window.innerWidth >= 768) {
-                  handleOpen(currentIndex);
-                }                
-              }}
->>>>>>> dev
           >
             <CardMedia
               component="img"
               image={mainImage}
               alt="Main product"
-<<<<<<< HEAD
               sx={{
                 borderRadius: 2,
                 width: "100%",
                 height: "100%",
                 objectFit: "contain",
-=======
-              sx={{ 
-                borderRadius: 2, 
-                width:  "100%",
-                height: "100%",
-                objectFit: "contain", 
->>>>>>> dev
                 transition: "opacity 0.3s ease-in-out",
               }}
             />
             <IconButton
-<<<<<<< HEAD
               onClick={handlePrev}
               sx={{
                 position: "absolute",
@@ -216,39 +168,6 @@ const WomenPage = () => {
             >
               <ArrowForwardIos sx={{ fontSize: 30 }} />
             </IconButton>
-=======
-      onClick={handlePrev}
-      sx={{
-        position: "absolute",
-        top: "50%",
-        left: 10,
-        transform: "translateY(-50%)",
-        color: "white",
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        display: { xs: "flex", md: "none" }, 
-        "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.7)" },
-      }}
-    >
-      <ArrowBackIos sx={{ fontSize: 30 }} />
-    </IconButton>
-
-    {/* Right Arrow */}
-    <IconButton
-      onClick={handleNext}
-      sx={{
-        position: "absolute",
-        top: "50%",
-        right: 10,
-        transform: "translateY(-50%)",
-        color: "white",
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        display: { xs: "flex", md: "none" }, 
-        "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.7)" },
-      }}
-    >
-      <ArrowForwardIos sx={{ fontSize: 30 }} />
-    </IconButton>
->>>>>>> dev
           </Card>
         </Grid>
 
@@ -259,41 +178,25 @@ const WomenPage = () => {
           container
           direction="column"
           spacing={2}
-<<<<<<< HEAD
           sx={{
             mt: { xs: 1, md: 8 },
             mx: { xs: 2, md: 1 },
-=======
-          sx={{ 
-            mt: { xs: 1, md: 8 }, 
-            mx: { xs: 2, md: 1},
-
->>>>>>> dev
           }}
         >
           <Typography
             variant="h2"
             sx={{
-<<<<<<< HEAD
               fontSize: { xs: 18, md: 22 },
               color: "hsl(219, 9%, 45%)",
               m: { xs: 0.5, md: 2 },
               fontWeight: 700,
               textAlign: "start",
-=======
-              fontSize: { xs:18, md:22},
-              color: "hsl(219, 9%, 45%)",
-              m: { xs: 0.5, md: 2 },
-              fontWeight: 700,
-              textAlign: 'start'
->>>>>>> dev
             }}
           >
             Sneaker company
           </Typography>
           <Typography
             variant="h1"
-<<<<<<< HEAD
             sx={{
               fontSize: { xs: 28, md: 36 },
               fontWeight: "bold",
@@ -302,15 +205,11 @@ const WomenPage = () => {
               color: "black",
               textAlign: "start",
             }}
-=======
-            sx={{ fontSize: { xs: 28, md:36}, fontWeight: "bold", m: { xs: 0.5, md: 2 }, pt: {xs: 0.5, md:2}, color: 'black', textAlign: 'start' }}
->>>>>>> dev
           >
             Fall Limited Edition Sneakers
           </Typography>
           <Typography
             variant="body1"
-<<<<<<< HEAD
             sx={{
               fontSize: 16,
               m: { xs: 0.5, md: 2 },
@@ -323,11 +222,9 @@ const WomenPage = () => {
             These low-profile sneakers are your perfect casual wear companion,
             Featuring a durable rubber outer solse, they'll withstand everything
             the weather can offer.
-=======
             sx={{ fontSize: 16, m: { xs: 0.5, md:2}, pt: { xs: 1, md:4}, color: "hsl(219, 9%, 45%)", textAlign: 'start', lineHeight: {xs: 1.5, md:2} }}
           >
             These low-profile sneakers are your perfect casual wear companion, Featuring a durable rubber outer solse, they'll withstand everything the weather can offer.
->>>>>>> dev
           </Typography>
           <Box
             sx={{
@@ -335,11 +232,8 @@ const WomenPage = () => {
               alignItems: "flex-start",
               flexDirection: { xs: "row", md: "column" },
               justifyContent: { xs: "space-between", md: "flex-start" },
-<<<<<<< HEAD
               flexWrap: "wrap",
-=======
               flexWrap: 'wrap',
->>>>>>> dev
               pt: 2,
               gap: { xs: 1, md: 1 },
             }}

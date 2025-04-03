@@ -1,24 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import WomenPage, {getProducts} from './pages/WomenPage'
-import HomePage from './pages/HomePage'
-import { Box } from '@mui/material'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import WomenPage2 from './pages/WomenPage2'
+import { useState } from "react";
+import { Box } from "@mui/material";
+
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+
+import "./App.css";
+
+// Import Pages
+import WomenPage from "./pages/WomenPage";
+import HomePage from "./pages/HomePage";
+
+// Import Layouts
+import RootLayout from "./layouts/RootLayout";
+
+// Import components
+import NavBar from "./components/NavBar";
 
 function App() {
 
+  const routesFromElements = createRoutesFromElements(
+    <Route
+      path="/"
+      element={
+        <RootLayout
+          NavBar={NavBar}
+        />
+      }
+    >
+      <Route index element={<HomePage />} />
+      <Route path="/women" element={<WomenPage />} />
+    </Route>
+  );
+
+  const router = createBrowserRouter(routesFromElements);
+
   return (
-    <Router>
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/women" element={<WomenPage />} loader={getProducts} />
-      <Route path="/women2" element={<WomenPage2 />} loader={getProducts}/>
-    </Routes>
-  </Router>
-  )
+    <>
+      <Box>
+        <RouterProvider router={router} />
+      </Box>
+    </>
+  );
 }
 
-export default App
+export default App;
