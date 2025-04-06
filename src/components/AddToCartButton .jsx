@@ -4,7 +4,16 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 const AddToCartButton = () => {
   return (
-    <Button variant="contained" sx={{ bgcolor: "orange", color: "black", fontWeight: 800 }}>
+    <Button variant="contained"               sx={{
+      width: { xs: "100%", md: 300 },
+      height: { xs: 55, md: 60 },
+      bgcolor: "hsl(26, 100%, 55%)",
+      color: "black",
+      fontWeight: 800,
+      borderRadius: 3,
+      "&:hover": { bgcolor: "hsl(26, 95.00%, 65%)" },
+    }}>
+      
       <AddShoppingCartIcon sx={{ mr: 2 }} />
       Add to cart
     </Button>

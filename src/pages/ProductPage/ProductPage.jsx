@@ -1,79 +1,149 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {
-  Container, Grid, Card, CardMedia, Typography, Box, Button, IconButton
-} from "@mui/material";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { Box, Container, Grid, Skeleton, Typography } from "@mui/material";
 import { PRODUCT_DATA } from "../../mock-data/Products";
+import ModalGallery from "../../components/ModalGallery";
+import ImageGallery from "../../components/ImageGallery";
+import ProductDetails from "../../components/ProductDetails";
+import QuantitySelector from "../../components/QuantitySelector";
+import AddToCartButton from "../../components/AddToCartButton ";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const ProductPage = () => {
-  const { gender } = useParams(); // Get gender from URL
-  const genderMap = {
-    women: "female",
-    men: "male"
-  };
-  const filteredProducts = PRODUCT_DATA.filter((p) => p.gender === genderMap[gender]);
+  const { gender } = useParams();
+  const genderMap = { women: "female", men: "male" };
+  const filteredProducts = PRODUCT_DATA.filter(
+    (p) => p.gender === genderMap[gender]
+  );
 
-  if (filteredProducts.length === 0) return <Typography>No products found.</Typography>;
+  if (filteredProducts.length === 0)
+    return <Typography>No products found.</Typography>;
 
-  const product = filteredProducts[0]; // Assuming one product per category
-  const images = product.image;
-  const [mainImage, setMainImage] = useState(images[0]);
+  const product = filteredProducts[0];
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [quantity, setQuantity] = useState(1);
+  const [mainImage, setMainImage] = useState(product.image[0]);
+  const [modalIndex, setModalIndex] = useState(0);
+  const modalImage = product.image[modalIndex];
+  const [quantity, setQuantity] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleNext = () => {
-    const newIndex = (currentIndex + 1) % images.length;
+    const newIndex = (currentIndex + 1) % product.image.length;
     setCurrentIndex(newIndex);
-    setMainImage(images[newIndex]);
+    setMainImage(product.image[newIndex]);
   };
 
   const handlePrev = () => {
-    const newIndex = (currentIndex - 1 + images.length) % images.length;
+    const newIndex =
+      (currentIndex - 1 + product.image.length) % product.image.length;
     setCurrentIndex(newIndex);
-    setMainImage(images[newIndex]);
+    setMainImage(product.image[newIndex]);
   };
 
+  const handleClose = () => setOpen(false);
+
+  const handleModalNext = () => {
+    const newIndex = (currentIndex + 1) % product.image.length;
+    setModalIndex((prev) => (prev + 1) % product.image.length);
+  };
+
+  const handleModalPrev = () => {
+    const newIndex =
+      (currentIndex - 1 + product.image.length) % product.image.length;
+    setModalIndex(
+      (prev) => (prev - 1 + product.image.length) % product.image.length
+    );
+  };
+  const handleIncrease = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
+  const handleDecrease = () => {
+    setQuantity((prev) => (prev > 1 ? prev - 1 : 0));
+  };
+
+  const theme = useTheme();
+  const isMediumUp = useMediaQuery(theme.breakpoints.up("md"));
+
+  const handleImageClick = () => {
+    if (isMediumUp) {
+      setOpen(true);
+    }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000); // Simulate loading
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <Container sx={{ mt: 4 }}>
-      <Grid container spacing={2} justifyContent="center" alignItems="flex-start">
-        {/* Image Section */}
+    <Container disableGutters sx={{ mx: { xs: 0, md: 10 } }}>
+      <Grid container spacing={2} justifyContent="center">
         <Grid item xs={12} md={6}>
-          <Card sx={{ maxWidth: 500, cursor: "pointer", position: "relative" }}>
-            <CardMedia component="img" image={mainImage} alt="Product" sx={{ width: "100%" }} />
-            <IconButton onClick={handlePrev} sx={{ position: "absolute", top: "50%", left: 10 }}>
-              <ArrowBackIos />
-            </IconButton>
-            <IconButton onClick={handleNext} sx={{ position: "absolute", top: "50%", right: 10 }}>
-              <ArrowForwardIos />
-            </IconButton>
-          </Card>
+          <ImageGallery
+            images={product.image}
+            mainImage={mainImage}
+            setMainImage={setMainImage}
+            setCurrentIndex={setCurrentIndex}
+            currentIndex={currentIndex}
+            handleImageClick={handleImageClick}
+            loading={loading}
+          />
         </Grid>
 
-        {/* Product Info Section */}
         <Grid item xs={12} md={6}>
-          <Typography variant="h6">{product.subTitle}</Typography>
-          <Typography variant="h4" fontWeight="bold">{product.titel}</Typography>
-          <Typography variant="body1">{product.description}</Typography>
-
-          <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
-            <Typography variant="h5" fontWeight="bold">${product.price * product.discount}</Typography>
-            <Typography sx={{ textDecoration: "line-through", ml: 2 }}>${product.price}</Typography>
+          <ProductDetails product={product} loading={loading} />
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: { xs: "column", md: "row" },
+              justifyContent: { xs: "space-between", md: "space-evenly" },
+              width: { xs: "auto%", md: "auto" },
+              mb: { xs: 1, md: 0 },
+              mt: { xs: 2, md: 2 },
+              mx: { xs: 2, md: 0 },
+            }}
+          >
+            <QuantitySelector
+              quantity={quantity}
+              setQuantity={setQuantity}
+              handleDecrease={handleDecrease}
+              handleIncrease={handleIncrease}
+            />
+            {loading ? (
+              <Skeleton variant="rectangular" width={150} height={40} />
+            ) : (
+              <AddToCartButton quantity={quantity} />
+            )}
           </Box>
-
-          {/* Quantity & Add to Cart */}
-          <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
-            <Button onClick={() => setQuantity(q => Math.max(1, q - 1))}>-</Button>
-            <Typography sx={{ mx: 2 }}>{quantity}</Typography>
-            <Button onClick={() => setQuantity(q => q + 1)}>+</Button>
-          </Box>
-
-          <Button variant="contained" sx={{ mt: 2 }} startIcon={<AddShoppingCartIcon />}>
-            Add to Cart
-          </Button>
         </Grid>
       </Grid>
+
+      {isMediumUp && (
+        <ModalGallery
+          open={open}
+          setOpen={setOpen}
+          images={product.image}
+          handleClose={handleClose}
+          handlePrev={handleModalPrev}
+          handleNext={handleModalNext}
+          modalIndex={modalIndex}
+          setModalIndex={setModalIndex}
+        />
+      )}
+      {/* <ModalGallery
+        open={open}
+        setOpen={setOpen}
+        images={product.image}
+        handleClose={handleClose}
+        handlePrev={handleModalPrev}
+        handleNext={handleModalNext}
+        modalIndex={modalIndex}
+        setModalIndex={setModalIndex}
+      /> */}
     </Container>
   );
 };

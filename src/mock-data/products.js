@@ -7,7 +7,7 @@ import img4 from "../assets/Women/image-product-4.jpg";
 export const PRODUCT_DATA = [{
     gender: 'female',
     image: [img1, img2, img3, img4],
-    titel: 'Fall Limited Edition Sneaker',
+    title: 'Fall Limited Edition Sneaker',
     subTitle: 'Sneaker Company',
     description: `These low-profile sneakers are your perfect casual wear companion,
             Featuring a durable rubber outer solse, they'll withstand everything
@@ -20,7 +20,7 @@ export const PRODUCT_DATA = [{
 {
     gender: 'male',
     image: [],
-    titel: 'Fall Limited Edition Sneaker',
+    title: 'Fall Limited Edition Sneaker',
     subTitle: 'Sneaker Company',
     description: `These low-profile sneakers are your perfect casual wear companion,
             Featuring a durable rubber outer solse, they'll withstand everything

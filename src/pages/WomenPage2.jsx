@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Grid } from "@mui/material";
 import ImageGallery from "../components/ImageGallery.jsx";
-import ImageModal from "../components/ImageModal.jsx";
+import ImageModal from "../components/ModalGallery.jsx";
 import ProductDetails from "../components/ProductDetails.jsx";
 import QuantitySelector from "../components/QuantitySelector.jsx";
 import AddToCartButton from "../components/AddToCartButton .jsx";
