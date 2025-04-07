@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Box } from "@mui/material";
 
+
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -11,8 +12,9 @@ import {
 import "./App.css";
 
 // Import Pages
-import WomenPage from "./pages/WomenPage";
+import WomenPage2 from "./pages/WomenPage2";
 import HomePage from "./pages/HomePage";
+import ProductPage from "./pages/ProductPage/ProductPage";
 
 // Import Layouts
 import RootLayout from "./layouts/RootLayout";
@@ -22,6 +24,7 @@ import NavBar from "./components/NavBar";
 
 function App() {
 
+  
   const routesFromElements = createRoutesFromElements(
     <Route
       path="/"
@@ -32,8 +35,11 @@ function App() {
       }
     >
       <Route index element={<HomePage />} />
-      <Route path="/women" element={<WomenPage />} />
+      {/* En productPage för både men och women delen. Path bestäms av vilken du klickar på */}
+      <Route path="/:gender" element={<ProductPage />} />
+
     </Route>
+    
   );
 
   const router = createBrowserRouter(routesFromElements);
