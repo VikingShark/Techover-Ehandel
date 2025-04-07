@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Box, Container, Grid, Skeleton, Typography } from "@mui/material";
 import { PRODUCT_DATA } from "../../mock-data/Products";
@@ -9,6 +9,8 @@ import QuantitySelector from "../../components/QuantitySelector";
 import AddToCartButton from "../../components/AddToCartButton ";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+
+import { CartContext } from "../../../context/CartState"; 
 
 const ProductPage = () => {
   const { gender } = useParams();
@@ -25,7 +27,7 @@ const ProductPage = () => {
   const [mainImage, setMainImage] = useState(product.image[0]);
   const [modalIndex, setModalIndex] = useState(0);
   const modalImage = product.image[modalIndex];
-  const [quantity, setQuantity] = useState(0);
+  const { quantity, setQuantity } = useContext(CartContext); 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -134,16 +136,6 @@ const ProductPage = () => {
           setModalIndex={setModalIndex}
         />
       )}
-      {/* <ModalGallery
-        open={open}
-        setOpen={setOpen}
-        images={product.image}
-        handleClose={handleClose}
-        handlePrev={handleModalPrev}
-        handleNext={handleModalNext}
-        modalIndex={modalIndex}
-        setModalIndex={setModalIndex}
-      /> */}
     </Container>
   );
 };

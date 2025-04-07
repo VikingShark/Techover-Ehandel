@@ -1,7 +1,6 @@
 import { Box, Button, Divider, Typography } from "@mui/material";
-import temporaryImg from "../assets/image-product-1.jpg";
 import { useContext } from "react";
-import { CartContext } from "../../context/CartState"; // Använd CartContext här
+import { CartContext } from "../../context/CartState"; 
 
 const Cart = ({ openCart }) => {
   const { quantity } = useContext(CartContext); 
@@ -53,7 +52,7 @@ const Cart = ({ openCart }) => {
         <Box sx={{ display: "flex", gap: 2 }}>
           <Box
             component="img"
-            src={temporaryImg}
+            src={null}
             alt={null}
             sx={{
               width: "50px",
