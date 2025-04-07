@@ -6,18 +6,22 @@ import { NavLink } from "react-router-dom";
 
 import "./NavBar.css";
 import MobileSideMenu from "./MobileSideMenu";
+import Cart from "./Cart";
 
 const NavBar = () => {
   
-    // Handle open/close state of side menu
+    // Handle open/close state of side menu/cart
   const [openMenu, setOpenMenu] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
+
 
   const handleOpenMenu = () => {
     setOpenMenu((prev) => !prev);
-    console.log(openMenu ? "menyn är stängd" : "menyn är öppen");
   };
 
-  const handleOpenCart = () => {};
+  const handleOpenCart = () => {
+    setOpenCart((prev) => !prev);
+  };
 
   const navLinks = [
     {
@@ -146,14 +150,17 @@ const NavBar = () => {
             justifyContent: "flex-end",
           }}
         >
-          <ShoppingCartOutlined
-            onClick={handleOpenCart}
-            sx={{
-              color: "#68707d",
-              fontSize: { xs: 22, md: 26 },
-              "&:hover": { cursor: "pointer" },
-            }}
-          />
+          <Box>
+            <ShoppingCartOutlined
+                onClick={handleOpenCart}
+                sx={{
+                color: "#68707d",
+                fontSize: { xs: 22, md: 26 },
+                "&:hover": { cursor: "pointer" },
+                }}
+            />
+            <Cart openCart={openCart} />
+          </Box>
           <Avatar
             sx={{
               "&:hover": { cursor: "pointer", boxShadow: "0 0 0 2px #ff7d1a" },
