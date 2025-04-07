@@ -1,7 +1,11 @@
 import { Box, Button, Divider, Typography } from "@mui/material";
 import temporaryImg from "../assets/image-product-1.jpg";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartState"; // Använd CartContext här
 
 const Cart = ({ openCart }) => {
+  const { quantity } = useContext(CartContext); 
+
   return (
     <Box
       sx={{
@@ -20,7 +24,7 @@ const Cart = ({ openCart }) => {
         transition: "0.4s right ease",
         textAlign: "left",
         borderRadius: "7px",
-        zIndex: 9999 
+        zIndex: 9999,
       }}
     >
       <Typography
@@ -40,9 +44,9 @@ const Cart = ({ openCart }) => {
         sx={{
           height: "55%",
           width: "90%",
-          display: 'flex',
+          display: "flex",
           flexDirection: "column",
-          justifyContent: 'space-between'
+          justifyContent: "space-between",
         }}
       >
         {/* Hantera conditional rendering när vi har context för innehållet av cart, om den är tom eller har innehåll */}
@@ -59,25 +63,25 @@ const Cart = ({ openCart }) => {
             }}
           ></Box>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <Typography>Här ska det vara dynamiskt</Typography>
+            <Typography>Testar global state här: {quantity}</Typography>
             <Typography>Här också, bilden också</Typography>
           </Box>
         </Box>
         <Button
-              variant="contained"
-              sx={{
-                width: '100%',
-                height: '50px',
-                bgcolor: "hsl(26, 100%, 55%)",
-                color: "black",
-                fontWeight: 800,
-                borderRadius: 3,
-                textTransform: 'none',
-                "&:hover": {bgcolor: "hsl(26, 95.00%, 65%)"}
-              }}
-            >
-              Checkout
-            </Button>
+          variant="contained"
+          sx={{
+            width: "100%",
+            height: "50px",
+            bgcolor: "hsl(26, 100%, 55%)",
+            color: "black",
+            fontWeight: 800,
+            borderRadius: 3,
+            textTransform: "none",
+            "&:hover": { bgcolor: "hsl(26, 95.00%, 65%)" },
+          }}
+        >
+          Checkout
+        </Button>
       </Box>
     </Box>
   );
