@@ -15,6 +15,8 @@ import "./App.css";
 import WomenPage2 from "./pages/WomenPage2";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage/ProductPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 
 // Import Layouts
 import RootLayout from "./layouts/RootLayout";
@@ -37,6 +39,8 @@ function App() {
       <Route index element={<HomePage />} />
       {/* En productPage för både men och women delen. Path bestäms av vilken du klickar på */}
       <Route path="/:gender" element={<ProductPage />} />
+      <Route path="/about" element={<AboutPage />} /> 
+      <Route path="/contact" element={<ContactPage />} />
 
     </Route>
     
