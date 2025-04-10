@@ -28,6 +28,7 @@ const ProductPage = () => {
   const [modalIndex, setModalIndex] = useState(0);
   const modalImage = product.image[modalIndex];
   const { quantity, setQuantity } = useContext(CartContext); 
+  const { cartItems, setCartItems } = useContext(CartContext); 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -75,6 +76,26 @@ const ProductPage = () => {
     }
   };
 
+  const handleAddToCart = () => {
+    setCartItems((prevCartItems) => {
+      // Kontrollera om produkten redan finns i cartItems
+      const existingProductIndex = prevCartItems.findIndex(
+        (item) => item.product.id === product.id
+      );
+  
+      if (existingProductIndex !== -1) {
+        // Uppdatera kvantiteten för den befintliga produkten
+        const updatedCartItems = [...prevCartItems];
+        updatedCartItems[existingProductIndex].quantity += quantity;
+        return updatedCartItems;
+      } else {
+        // Lägg till den nya produkten i cartItems
+        return [...prevCartItems, { product, quantity }];
+      }
+    });
+    setQuantity(1);
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000); // Simulate loading
     return () => clearTimeout(timer);
@@ -118,7 +139,7 @@ const ProductPage = () => {
             {loading ? (
               <Skeleton variant="rectangular" width={150} height={40} />
             ) : (
-              <AddToCartButton quantity={quantity} />
+              <AddToCartButton onClick={handleAddToCart} quantity={quantity} />
             )}
           </Box>
         </Grid>

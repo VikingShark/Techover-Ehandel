@@ -1,19 +1,20 @@
 import { Box, Divider, Typography, Avatar } from "@mui/material";
 import { ShoppingCartOutlined, Menu, Close } from "@mui/icons-material";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./NavBar.css";
 import MobileSideMenu from "./MobileSideMenu";
 import Cart from "./Cart";
+import { CartContext } from "../../context/CartState";
 
 const NavBar = () => {
-  
-    // Handle open/close state of side menu/cart
+  const { cartItems, cartIsEmpty } = useContext(CartContext);
+
+  // Handle open/close state of side menu/cart
   const [openMenu, setOpenMenu] = useState(false);
   const [openCart, setOpenCart] = useState(false);
-
 
   const handleOpenMenu = () => {
     setOpenMenu((prev) => !prev);
@@ -22,6 +23,10 @@ const NavBar = () => {
   const handleOpenCart = () => {
     setOpenCart((prev) => !prev);
   };
+
+  const totalQuantity = cartItems.reduce((total, item) => {
+    return total + (item.quantity);
+  }, 0);
 
   const navLinks = [
     {
@@ -58,7 +63,11 @@ const NavBar = () => {
         flexDirection: "column",
       }}
     >
-      <MobileSideMenu openMenu={openMenu} setOpenMenu={setOpenMenu} navLinks={navLinks} />
+      <MobileSideMenu
+        openMenu={openMenu}
+        setOpenMenu={setOpenMenu}
+        navLinks={navLinks}
+      />
       <Box
         px={2}
         sx={{
@@ -151,14 +160,35 @@ const NavBar = () => {
           }}
         >
           <Box>
-            <ShoppingCartOutlined
+            <Box sx={{ position: "relative", display: "inline-block" }}>
+              <ShoppingCartOutlined
                 onClick={handleOpenCart}
                 sx={{
-                color: "#68707d",
-                fontSize: { xs: 22, md: 26 },
-                "&:hover": { cursor: "pointer" },
+                  color: "#68707d",
+                  fontSize: { xs: 22, md: 26 },
+                  "&:hover": { cursor: "pointer" },
                 }}
-            />
+              />
+              <Typography
+                sx={{
+                  position: "absolute",
+                  top: 2,
+                  right: 7,
+                  backgroundColor: "#ff7d1a",
+                  color: "#ffffff",
+                  borderRadius: "10px",
+                  width: 18,
+                  height: 12,
+                  fontSize: 9,
+                  display: cartIsEmpty ? "none" : "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transform: "translate(50%, -50%)",
+                }}
+              >
+                {totalQuantity}
+              </Typography>
+            </Box>
             <Cart openCart={openCart} />
           </Box>
           <Avatar
