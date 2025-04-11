@@ -2,8 +2,11 @@ import { useState } from "react";
 import { Box, TextField, Button, Typography, Divider } from "@mui/material";
 import emailjs from "emailjs-com";
 import supportImg from "../assets/Customer-support.png";
+import { useTheme } from "@mui/material/styles";
 
 const ContactPage = () => {
+  const theme = useTheme();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -71,8 +74,8 @@ const ContactPage = () => {
         sx={{
           maxWidth: 600,
           width: "100%",
-          backgroundColor: "#ffffff",
-          color: "#000000",
+          backgroundColor: theme.palette.neutral.white,
+          color: theme.palette.neutral.veryDarkBlue,
           textAlign: "center",
           borderRadius: "8px",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
@@ -84,13 +87,13 @@ const ContactPage = () => {
           sx={{
             fontWeight: "900",
             marginBottom: 2,
-            color: "#000000",
+            color: theme.palette.neutral.veryDarkBlue,
           }}
         >
           Contact Us
         </Typography>
         <Divider
-          sx={{ backgroundColor: "#ff7d1a", height: "2px", marginBottom: 4 }}
+          sx={{ backgroundColor: theme.palette.primary.main, height: "2px", marginBottom: 4 }}
         />
         <form onSubmit={handleSubmit}>
           <TextField
@@ -127,11 +130,11 @@ const ContactPage = () => {
             type="submit"
             variant="contained"
             sx={{
-              backgroundColor: "#ff7d1a",
-              color: "#000000",
+              backgroundColor: theme.palette.primary.main,
+              color: theme.palette.neutral.veryDarkBlue,
               fontWeight: "700",
               textTransform: "none",
-              "&:hover": { backgroundColor: "#e76a00" },
+              "&:hover": { backgroundColor: "hsl(26, 95.00%, 65%)" },
             }}
           >
             Send
@@ -141,7 +144,7 @@ const ContactPage = () => {
           <Typography
             sx={{
               marginTop: 2,
-              color: "#ff7d1a",
+              color: theme.palette.primary.main,
               fontWeight: "700",
             }}
           >

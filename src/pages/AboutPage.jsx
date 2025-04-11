@@ -1,7 +1,9 @@
 import { Box, Typography, Divider } from "@mui/material";
 import officeTeamImg from "../assets/office-team.png";
+import { useTheme } from "@mui/material/styles";
 
 const AboutPage = () => {
+  const theme = useTheme();
   return (
     <Box
       sx={{
@@ -13,7 +15,6 @@ const AboutPage = () => {
         padding: { xs: 2, md: 4 },
       }}
     >
-      {/* Bilden */}
       <Box
         component="img"
         src={officeTeamImg}
@@ -25,14 +26,12 @@ const AboutPage = () => {
           borderRadius: "8px",
         }}
       />
-
-      {/* Texten */}
       <Box
         sx={{
           maxWidth: 600,
           width: "100%",
-          backgroundColor: "#ffffff",
-          color: "#000000",
+          backgroundColor: theme.palette.neutral.white,
+          color: theme.palette.neutral.veryDarkBlue,
           textAlign: "center",
           borderRadius: "8px",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
@@ -44,13 +43,13 @@ const AboutPage = () => {
           sx={{
             fontWeight: "900",
             marginBottom: 2,
-            color: "#000000",
+            color: theme.palette.neutral.veryDarkBlue,
           }}
         >
           About Us
         </Typography>
         <Divider
-          sx={{ backgroundColor: "#ff7d1a", height: "2px", marginBottom: 4 }}
+          sx={{ backgroundColor: theme.palette.primary.main, height: "2px", marginBottom: 4 }}
         />
         <Typography
           variant="body1"
