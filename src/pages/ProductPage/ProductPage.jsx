@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Box, Container, Grid, Skeleton, Typography } from "@mui/material";
-import { PRODUCT_DATA } from "../../mock-data/Products";
+import { PRODUCT_DATA } from "../../mock-data/products";
 import ModalGallery from "../../components/ModalGallery";
 import ImageGallery from "../../components/ImageGallery";
 import ProductDetails from "../../components/ProductDetails";
