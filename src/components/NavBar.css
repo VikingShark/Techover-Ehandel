@@ -1,9 +1,16 @@
 .navlink {
     text-decoration: none;
-    color: #000000;
+    color: #68707d;
+    transition: border-bottom 0.3s ease, color 0.1s ease;
+}
+
+.navlink:hover {
+    color: #1d2025;
+    border-bottom: 5px solid #ff7d1a;
 }
 
 .navlink.active {
+    color: #1d2025;
     border-bottom: 5px solid #ff7d1a;
 }
 

@@ -3,6 +3,7 @@ import { ShoppingCartOutlined, Menu, Close } from "@mui/icons-material";
 
 import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
 
 import "./NavBar.css";
 import MobileSideMenu from "./MobileSideMenu";
@@ -10,6 +11,7 @@ import Cart from "./Cart";
 import { CartContext } from "../../context/CartState";
 
 const NavBar = () => {
+  const theme = useTheme(); // Access the theme
   const { cartItems, cartIsEmpty } = useContext(CartContext);
 
   // Handle open/close state of side menu/cart
@@ -25,7 +27,7 @@ const NavBar = () => {
   };
 
   const totalQuantity = cartItems.reduce((total, item) => {
-    return total + (item.quantity);
+    return total + item.quantity;
   }, 0);
 
   const navLinks = [
@@ -56,7 +58,7 @@ const NavBar = () => {
       sx={{
         width: "100%",
         height: 100,
-        backgroundColor: "#ffffff",
+        backgroundColor: theme.palette.neutral.white,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -88,7 +90,10 @@ const NavBar = () => {
             position: "relative",
           }}
         >
-          <Typography sx={{ color: "#000000", fontWeight: "900" }} variant="h4">
+          <Typography
+            sx={{ color: theme.palette.neutral.veryDarkBlue, fontWeight: "900" }}
+            variant="h4"
+          >
             sneakers
           </Typography>
           <Box
@@ -115,14 +120,14 @@ const NavBar = () => {
             gap: 1,
             width: "55%",
             height: "100%",
-            position: "relative",
+            position: "relative"
           }}
         >
           {openMenu ? (
             <Close
               onClick={handleOpenMenu}
               sx={{
-                color: "#68707d",
+                color: theme.palette.neutral.darkGrayishBlue,
                 fontSize: { xs: 22, md: 26 },
                 "&:hover": { cursor: "pointer" },
                 zIndex: 9999,
@@ -132,7 +137,7 @@ const NavBar = () => {
             <Menu
               onClick={handleOpenMenu}
               sx={{
-                color: "#68707d",
+                color: theme.palette.neutral.darkGrayishBlue,
                 fontSize: { xs: 22, md: 26 },
                 "&:hover": { cursor: "pointer" },
                 zIndex: 9999,
@@ -141,7 +146,7 @@ const NavBar = () => {
           )}
           <Typography
             sx={{
-              color: "#000000",
+              color: theme.palette.neutral.veryDarkBlue,
               fontWeight: "900",
               transform: "translateY(-3px)",
             }}
@@ -159,14 +164,14 @@ const NavBar = () => {
             justifyContent: "flex-end",
           }}
         >
-          <Box>
+          <Box sx={{fontSize: 2}}>
             <Box sx={{ position: "relative", display: "inline-block" }}>
               <ShoppingCartOutlined
                 onClick={handleOpenCart}
                 sx={{
-                  color: "#68707d",
+                  color: theme.palette.neutral.darkGrayishBlue,
                   fontSize: { xs: 22, md: 26 },
-                  "&:hover": { cursor: "pointer" },
+                  "&:hover": { cursor: "pointer", color: theme.palette.neutral.veryDarkBlue },
                 }}
               />
               <Typography
@@ -174,8 +179,8 @@ const NavBar = () => {
                   position: "absolute",
                   top: 2,
                   right: 7,
-                  backgroundColor: "#ff7d1a",
-                  color: "#ffffff",
+                  backgroundColor: theme.palette.primary.main,
+                  color: theme.palette.neutral.white,
                   borderRadius: "10px",
                   width: 18,
                   height: 12,
@@ -193,7 +198,10 @@ const NavBar = () => {
           </Box>
           <Avatar
             sx={{
-              "&:hover": { cursor: "pointer", boxShadow: "0 0 0 2px #ff7d1a" },
+              "&:hover": {
+                cursor: "pointer",
+                boxShadow: `0 0 0 2px ${theme.palette.primary.main}`,
+              },
               height: { xs: 26, md: 36 },
               width: { xs: 26, md: 36 },
             }}
@@ -203,7 +211,11 @@ const NavBar = () => {
         </Box>
       </Box>
       <Divider
-        sx={{ backgroundColor: "#ffffff", height: "1px", width: "100%" }}
+        sx={{
+          backgroundColor: theme.palette.neutral.lightGrayishBlue,
+          height: "1px",
+          width: "100%",
+        }}
       />
     </Box>
   );

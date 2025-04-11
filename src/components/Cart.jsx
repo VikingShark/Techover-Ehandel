@@ -2,8 +2,10 @@ import { Box, Button, Divider, Typography } from "@mui/material";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../context/CartState";
+import { useTheme } from "@mui/material/styles";
 
 const Cart = ({ openCart }) => {
+  const theme = useTheme();
   const { cartItems, setCartItems, cartIsEmpty, setCartIsEmpty } = useContext(CartContext);
   
   const handleDeleteCartItem = (id) => {
@@ -37,8 +39,8 @@ const Cart = ({ openCart }) => {
         height: "auto",
         minHeight: "225px",
         paddingBottom: 2,
-        backgroundColor: "#ffffff",
-        color: "#000000",
+        backgroundColor: theme.palette.neutral.white,
+        color: theme.palette.neutral.veryDarkBlue,
         boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.3)",
         position: "absolute",
         top: openCart ? 100 : "-100vh",
@@ -64,7 +66,7 @@ const Cart = ({ openCart }) => {
         Cart
       </Typography>
       <Divider
-        sx={{ backgroundColor: "#ffffff", height: "1px", width: "100%" }}
+        sx={{ backgroundColor: theme.palette.neutral.white, height: "1px", width: "100%" }}
       />
       <Box
         sx={{
@@ -80,12 +82,12 @@ const Cart = ({ openCart }) => {
             sx={{
               display: "flex",
               alignItems: "center",
-              marginBottom: 2,
               justifyContent: "center",
-              height: "65px"
+              height: "65px",
+              marginTop: 4
             }}
           >
-            <Typography sx={{ fontWeight: 700, textAlign: "center" }}>
+            <Typography sx={{ fontWeight: 700, textAlign: "center", color: theme.palette.neutral.black }}>
               Your cart is empty.
             </Typography>
           </Box>
@@ -106,7 +108,7 @@ const Cart = ({ openCart }) => {
                   objectFit: "contain",
                 }}
               />
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
+              <Box sx={{ display: "flex", flexDirection: "column", color: theme.palette.neutral.veryDarkBlue}}>
                 <Typography>{item.product.title}</Typography>
                 <Box sx={{ display: "flex", gap: 1 }}>
                   <Typography>
@@ -118,7 +120,7 @@ const Cart = ({ openCart }) => {
                 </Box>
               </Box>
               <DeleteForeverIcon
-                sx={{ "&:hover": { cursor: "pointer" } }}
+                sx={{ "&:hover": { cursor: "pointer", color: theme.palette.neutral.black } }}
                 onClick={() => handleDeleteCartItem(item.product.id)}
               />
             </Box>
@@ -128,10 +130,11 @@ const Cart = ({ openCart }) => {
         <Button
           variant="contained"
           sx={{
+            display: cartIsEmpty ? 'none' : 'flex',
             width: "100%",
             height: "50px",
-            bgcolor: "hsl(26, 100%, 55%)",
-            color: "black",
+            bgcolor: theme.palette.primary.main,
+            color: theme.palette.neutral.veryDarkBlue,
             fontWeight: 800,
             borderRadius: 3,
             textTransform: "none",
