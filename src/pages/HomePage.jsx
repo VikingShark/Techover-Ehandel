@@ -1,10 +1,13 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
+import CollectionPage from "./CollectionPage";
 
 const HomePage = () => {
     return (
+        <Container maxWidth="lg">
         <Box sx={{height: '100vh'}}>
-            <Typography sx={{color: '#000000'}}>Hello Jag är ifrån homepage</Typography>
+            <CollectionPage />
         </Box>
+        </Container>
     )
 }
 

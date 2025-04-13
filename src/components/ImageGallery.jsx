@@ -31,7 +31,7 @@ const ImageGallery = ({
       {loading ? (
   <Skeleton variant="rectangular" width="100%" height={400} />
 ) : (
-  <CardMedia component="img" image={mainImage} alt="Product" sx={{borderRadius: 4, height: {xs: '330px', md: 'auto'}}} />
+  <CardMedia component="img" image={mainImage} alt="Product" sx={{borderRadius: 4, height: {xs: '330px', md: '500px'}}} />
 
 )}
 

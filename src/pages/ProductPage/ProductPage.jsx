@@ -97,6 +97,12 @@ const ProductPage = () => {
   };
 
   useEffect(() => {
+    setMainImage(product.image[0]);
+    setCurrentIndex(0);
+    setModalIndex(0);
+  }, [product]);
+  
+  useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000); // Simulate loading
     return () => clearTimeout(timer);
   }, []);

@@ -37,7 +37,9 @@ const ModalGallery = ({ open, handleClose, images, handleNext, handlePrev,  setM
             objectFit: "contain",
             borderRadius: 4,
             outline: "none",
+            maxHeight: 500,
             "&:focus": { outline: "none" },
+            
           }}
         />
         <Box

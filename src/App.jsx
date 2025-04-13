@@ -12,17 +12,17 @@ import {
 import "./App.css";
 
 // Import Pages
-import WomenPage2 from "./pages/WomenPage2";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage/ProductPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
-
+import CollectionPage from "./pages/CollectionPage";
 // Import Layouts
 import RootLayout from "./layouts/RootLayout";
 
 // Import components
 import NavBar from "./components/NavBar";
+
 
 function App() {
 
@@ -41,6 +41,7 @@ function App() {
       <Route path="/:gender" element={<ProductPage />} />
       <Route path="/about" element={<AboutPage />} /> 
       <Route path="/contact" element={<ContactPage />} />
+      <Route path="/" element={<CollectionPage />} />
 
     </Route>
     
