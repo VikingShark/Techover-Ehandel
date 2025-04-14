@@ -22,6 +22,8 @@ import "slick-carousel/slick/slick-theme.css";
 const ProductCard = ({ product, isMediumUp, loading }) => {
   const [mainImage, setMainImage] = useState(product.image && product.image[0]);
 
+  const theme = useTheme();
+
   useEffect(() => {
     if (product?.image?.length > 0) {
       setMainImage(product.image[0]);
@@ -68,66 +70,64 @@ const ProductCard = ({ product, isMediumUp, loading }) => {
             position: "relative",
           }}
         >
-          {/* Image Area */}
-          <Box
-            sx={{
-              position: "relative",
-              p: 1,
-              display: "flex",
-              flexDirection: isMediumUp ? "row" : "column",
-            }}
-          >
-            {loading ? (
-              <Skeleton variant="rectangular" width="100%" height={220} />
-            ) : (
-              <>
-                <CardMedia
-                  component="img"
-                  height="220"
-                  image={mainImage}
-                  alt={product.title}
-                  sx={{
-                    width: isMediumUp ? "75%" : "100%",
-                    borderRadius: 1,
-                  }}
-                />
-                <Box
-                  sx={{
-                    width: isMediumUp ? "25%" : "100%",
-                    mt: isMediumUp ? 0 : 1,
-                    ml: isMediumUp ? 1 : 0,
-                  }}
-                >
-                  <Slider {...sliderSettings}>
-                    {product.image.map((img, i) => (
-                      <Box
-                        key={i}
-                        component="img"
-                        src={img}
-                        alt={`thumb-${i}`}
-                        sx={{
-                          width: "100%",
-                          height: 60,
-                          objectFit: "cover",
-                          borderRadius: 1,
-                          border:
-                            mainImage === img
-                              ? "2px solid #1976d2"
-                              : "1px solid #ccc",
-                        }}
-                      />
-                    ))}
-                  </Slider>
-                </Box>
-              </>
-            )}
-
-            {/* Discount Chip */}
+                  <Box
+                    sx={{
+                      position: "relative",
+                      p: 1,
+                      display: "flex",
+                      flexDirection: isMediumUp ? "row" : "column",
+                    }}
+                  >
+                    {loading ? (
+                      <Skeleton variant="rectangular" width="100%" height={220} />
+                    ) : (
+                      <>
+                        <CardMedia
+                          component="img"
+                          height="220"
+                          image={mainImage}
+                          alt={product.title}
+                          sx={{
+                            width: isMediumUp ? "75%" : "100%",
+                            borderRadius: 1,
+                            
+                          }}
+                        />
+                        <Box
+                          sx={{
+                            width: isMediumUp ? "25%" : "100%",
+                            mt: isMediumUp ? 0 : 1,
+                            ml: isMediumUp ? 1 : 0,
+                          }}
+                        >
+                          <Slider {...sliderSettings}>
+                            {product.image.map((img, i) => (
+                              <Box
+                                key={i}
+                                component="img"
+                                src={img}
+                                alt={`thumb-${i}`}
+                                sx={{
+                                  width: "100%",
+                                  height: 60,
+                                  objectFit: "cover",
+                                  borderRadius: 1,
+                                  border:
+                                    mainImage === img
+                                      ? `1px solid ${theme.palette.primary.main}` // Added theme color
+                                      : "0px solid #ccc",
+                                }}
+                              />
+                            ))}
+                          </Slider>
+                        </Box>
+                      </>
+                    )}
             {!loading && product.discount > 0 && (
               <Chip
                 icon={<LocalOfferIcon />}
                 label={`-${product.discount * 100}%`}
-                color="error"
+                
                 size="large"
                 sx={{
                   position: "absolute",
@@ -135,6 +135,8 @@ const ProductCard = ({ product, isMediumUp, loading }) => {
                   left: 0,
                   fontWeight: "bold",
                   borderRadius: 1,
+                  bgcolor: theme.palette.primary.main,
+                  color: theme.palette.neutral.veryDarkBlue
                 }}
               />
             )}

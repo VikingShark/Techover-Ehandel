@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardMedia, IconButton, Grid, Box, Skeleton } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
+import { useTheme } from "@mui/material/styles";
 
 const ImageGallery = ({
   images,
@@ -22,6 +23,7 @@ const ImageGallery = ({
     setCurrentIndex(newIndex);
     setMainImage(images[newIndex]);
   };
+  const theme = useTheme();
 
   return (
     <Card
@@ -46,8 +48,8 @@ const ImageGallery = ({
           top: "50%",
           left: 10,
           transform: "translateY(-50%)",
-          color: "black",
-          bgcolor: 'white',
+          color: theme.palette.neutral.veryDarkBlue,
+          bgcolor: theme.palette.neutral.white,
           "&:hover": {
             backgroundColor: "white",
             color: 'black',
@@ -115,7 +117,8 @@ const ImageGallery = ({
             sx={{
               m: 2,
               backgroundColor:
-                mainImage === img ? "rgba(255, 255, 255, 0.3)" : "transparent",
+                mainImage === img                   ? theme.palette.neutral.lightGrayishBlue
+                : "transparent",
             }}
           >
                   {loading ? (
@@ -130,7 +133,8 @@ const ImageGallery = ({
                 height: 100,
                 cursor: "pointer",
                 border:
-                  mainImage === img ? "3px solid hsl(26, 100%, 65%)" : "none",
+                  mainImage === img ? `3px solid ${theme.palette.primary.main}`
+                  : "none",
                 position: "relative",
                 "&:hover::after": {
                   content: '""',

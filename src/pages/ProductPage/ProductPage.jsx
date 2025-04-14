@@ -10,6 +10,7 @@ import AddToCartButton from "../../components/AddToCartButton ";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
+
 import { CartContext } from "../../../context/CartState"; 
 
 const ProductPage = () => {
